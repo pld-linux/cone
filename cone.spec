@@ -1,13 +1,12 @@
 #
 # TODO:
-#	- maybe split leaf editor ??
-#	- look at html files
+#	- test and rel. 1
 #
-Summary:	CONE - COnsole Newsreader and Emailer
+Summary:	CONE - Console Newsreader and Emailer
 Summary(pl):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
 Version:	0.60
-Release:	0.1
+Release:	0.5
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
@@ -15,6 +14,7 @@ Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
 URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	fam-devel
 BuildRequires:	ncurses-devel
 BuildRequires:	libstdc++-devel
@@ -64,14 +64,33 @@ Ten pakiet zawiera statyczn± bibliotekê do tworzenia aplikacji z
 u¿yciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki
 C++ dla klientów pocztowych.
 
+%package -n leaf
+Summary:	Console text file editor
+Summary(pl):	Konsolowy edytor plików tekstowych
+Group:		Applications/Editors
+
+%description -n leaf
+Leaf is a simple console text file editor, with paragraph word-wrapping
+and spell checking. Leaf is based on the text editor in the Cone mail
+reader and composer.
+
+%description -n leal -l pl
+Leaf jest prostym konsolowym edytorem plików tekstowych. Jest oparty na
+edytorze u¿ywanym w czytniku poczty Cone.
+
 %prep
 %setup -q
 
 %build
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+
 CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
 PATH=$PATH:/usr/%{_lib}/openssl; export PATH
 %configure \
-	--with-devel
+	--with-devel \
+	SENDMAIL=%{_sbindir}/sendmail
 
 %{__make}
 
@@ -94,6 +113,9 @@ mail-* mimestruct* native* r11* r8* synchronous.html; do
 mv -f $RPM_BUILD_ROOT%{_datadir}/cone/$file devel
 done
 
+# leaf doc
+mv -f $RPM_BUILD_ROOT%{_datadir}/cone/leaf.html .
+
 # rest *.html will go to primary docs
 mkdir docs
 mv -f $RPM_BUILD_ROOT%{_datadir}/cone/*.html docs
@@ -110,17 +132,23 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog README NEWS docs/
 %config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/cone
 %attr(755,root,root) %{_bindir}/cone
-%attr(755,root,root) %{_bindir}/leaf
 %attr(755,root,root) %{_bindir}/mailtool
 %{_datadir}/cone
-%{_mandir}/man1/*
+%{_mandir}/man1/cone*
+%{_mandir}/man1/mailtool*
 
 %files devel
 %defattr(644,root,root,755)
-%doc devel/
+%doc devel/*
 %{_includedir}/libmail
 %{_mandir}/man[35]/*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libmail.a
+
+%files -n leaf
+%defattr(644,root,root,755)
+%doc leaf.html
+%attr(755,root,root) %{_bindir}/leaf
+%{_mandir}/man1/leaf*
