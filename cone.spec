@@ -7,6 +7,7 @@ License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
 # Source0-md5:	96883bf940dded1a135765aec7a9de26
+Patch0:		%{name}-maildir.patch
 URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
 BuildRequires:	autoconf
@@ -77,6 +78,7 @@ edytorze u¿ywanym w czytniku poczty Cone.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
