@@ -40,8 +40,8 @@ Summary(pl):	Pliki nag³ówkowe LibMAIL
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-This package includes the header files for developing application using
-LibMAIL - a high level, C++ OO library for mail clients.
+This package includes the header files for developing application
+using LibMAIL - a high level, C++ OO library for mail clients.
 
 %description devel -l pl
 pusty
@@ -63,7 +63,7 @@ pusty
 %setup -q
 
 %build
-CXXFLAGS="%{rpmcflags} -I/usr/include/ncurses"
+CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
 %configure \
     --with-devel
 
