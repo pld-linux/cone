@@ -1,0 +1,45 @@
+diff -Nur old/cone/cone.C new/cone/cone.C
+--- old/cone/cone.C	2004-05-16 02:50:31.000000000 +0000
++++ new/cone/cone.C	2004-09-05 17:37:14.000000000 +0000
+@@ -960,6 +960,10 @@
+ 	{
+ 		d="maildir:Maildir"; // This system uses maildirs.
+ 	}
++	if (isMaildir("Mail/Maildir"))
++	{
++		d="maildir:Mail/Maildir"; // maildirs = Mail/Maildir
++	}
+ 	else if ( stat((d=h + "/mail/.").c_str(), &stat_buf) == 0)
+ 	{
+ 		d="inbox:mail"; // This system uses mboxes.
+diff -Nur old/cone/mainmenu.C new/cone/mainmenu.C
+--- old/cone/mainmenu.C	2004-04-25 03:39:34.000000000 +0000
++++ new/cone/mainmenu.C	2004-09-05 17:36:23.000000000 +0000
+@@ -343,15 +343,25 @@
+ 
+ 		if (key_INBOXMBOX == ka[0])
+ 		{
+-			string maildir=homedir + "/Maildir/.";
++			string maildir=homedir + "/Mail/Maildir/.";
+ 
+ 			if (isMaildir(maildir))
+ 			{
+-				defaultLocation="Maildir";
++				defaultLocation="Mail/Maildir";
+ 				isDefaultMaildir=true;
+ 			}
+ 			else
++			{
++			    maildir=homedir + "/Maildir/.";
++
++			    if (isMaildir(maildir))
++			    {
++				defaultLocation="Maildir";
++				isDefaultMaildir=true;
++			    }
++			    else
+ 				defaultLocation="mail";
++			}
+ 		}
+ 
+ 		string f;
