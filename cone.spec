@@ -19,6 +19,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel
 BuildRequires:	openssl-tools-perl
 BuildRequires:	perl-base
+BuildRequires:	sysconftool
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
