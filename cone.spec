@@ -79,6 +79,7 @@ edytorze u¿ywanym w czytniku poczty Cone.
 %setup -q
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
