@@ -74,7 +74,7 @@ Leaf is a simple console text file editor, with paragraph word-wrapping
 and spell checking. Leaf is based on the text editor in the Cone mail
 reader and composer.
 
-%description -n leal -l pl
+%description -n leaf -l pl
 Leaf jest prostym konsolowym edytorem plików tekstowych. Jest oparty na
 edytorze u¿ywanym w czytniku poczty Cone.
 
