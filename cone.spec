@@ -1,12 +1,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	0.60
+Version:	0.61
 Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	b2ae0cb3808e5485d566474c8bf251f9
+# Source0-md5:	bf3eaf6bf781115d99ed91f899de2ead
 URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
 BuildRequires:	autoconf
@@ -107,7 +107,7 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/cone.dist $RPM_BUILD_ROOT%{_sysconfdir}/cone
 # move devel docs from datadir
 mkdir devel
 for file in account-* address.html book.html c2*.html e*.html folder-* \
-mail-* mimestruct* native* r11* r8* synchronous.html; do
+header* libmail*.html mail-* mimestruct* misc* native* synchronous.html; do
 mv -f $RPM_BUILD_ROOT%{_datadir}/cone/$file devel
 done
 
@@ -117,6 +117,7 @@ mv -f $RPM_BUILD_ROOT%{_datadir}/cone/leaf.html .
 # rest *.html will go to primary docs
 mkdir docs
 mv -f $RPM_BUILD_ROOT%{_datadir}/cone/*.html docs
+mv -f $RPM_BUILD_ROOT%{_datadir}/cone/manpage.css docs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -135,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc devel/*
 %{_includedir}/libmail
-%{_mandir}/man[35]/*
+%{_mandir}/man3/*
 
 %files static
 %defattr(644,root,root,755)
