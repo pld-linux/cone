@@ -107,7 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ABOUT-NLS ChangeLog README NEWS AUTHORS docs/
+%doc AUTHORS ChangeLog README NEWS docs/
 %config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/cone
 %attr(755,root,root) %{_bindir}/cone
 %attr(755,root,root) %{_bindir}/leaf
