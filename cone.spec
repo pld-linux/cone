@@ -1,73 +1,77 @@
 #
 # TODO:
-#	- pl description
 #	- maybe split leaf editor ??
 #	- look at html files
 #
-Summary:	CONE mail reader
-Summary(pl):	Czytnik poczty
+Summary:	CONE - COnsole Newsreader and Emailer
+Summary(pl):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
 Version:	0.60
 Release:	0.1
 License:	GPL
 Group:		Applications/Mail
-Source0:	http://dl.sourceforge.net/sourceforge/courier/%{name}-%{version}.tar.bz2
+Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
 # Source0-md5:	b2ae0cb3808e5485d566474c8bf251f9
-URL:		http://www.courier-mta.org/cone
+URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
 BuildRequires:	autoconf
 BuildRequires:	fam-devel
-BuildRequires:	gcc-c++
 BuildRequires:	ncurses-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
 BuildRequires:	openssl-tools-perl
-BuildRequires:	perl
+BuildRequires:	perl-base
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-CONE is a simple, text-based E-mail reader and writer.
+CONE is a simple, text-based E-mail reader and writer, and a simple
+newsreader.
 
 %description -l pl
-CONE jest prostym, tekstowym klientem pocztowym.
+CONE jest prostym, tekstowym klientem pocztowym, a tak¿e prostym
+czytnikiem newsów.
 
-%package	devel
-Group:		Development/Languages
+%package devel
 Summary:	Header files for LibMAIL
 Summary(pl):	Pliki nag³ówkowe LibMAIL
+Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-This package includes the header files for developing application
+This package includes the header files for developing applications
 using LibMAIL - a high level, C++ OO library for mail clients.
 
 %description devel -l pl
-pusty
+Ten pakiet zawiera pliki nag³ówkowe do tworzenia aplikacji z u¿yciem
+LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki C++ dla
+klientów pocztowych.
 
-%package	static
+%package static
+Summary:	Static LibMAIL library
+Summary(pl):	Biblioteka statyczna LibMAIL
 Group:		Development/Libraries
-Summary:	Static libraries for LibMAIL
-Summary(pl):	Biblioteki statyczne LibMAIL
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-This package includes static files for developing application using
+This package contains static library for developing application using
 LibMAIL - a high level, C++ OO library for mail clients.
 
 %description static -l pl
-pusty
+Ten pakiet zawiera statyczn± bibliotekê do tworzenia aplikacji z
+u¿yciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki
+C++ dla klientów pocztowych.
 
 %prep
 %setup -q
 
 %build
 CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
-PATH=$PATH:/usr/lib/openssl; export PATH
+PATH=$PATH:/usr/%{_lib}/openssl; export PATH
 %configure \
-    --with-devel
+	--with-devel
 
 %{__make}
 
@@ -80,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # start cone directly
-mv -f $RPM_BUILD_ROOT%{_libdir}/cone $RPM_BUILD_ROOT%{_bindir}/
+mv -f $RPM_BUILD_ROOT%{_libdir}/cone $RPM_BUILD_ROOT%{_bindir}
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/cone.dist $RPM_BUILD_ROOT%{_sysconfdir}/cone
 
 # move devel docs from datadir
@@ -96,7 +100,7 @@ mv -f $RPM_BUILD_ROOT%{_datadir}/cone/*.html docs
 
 # install missing files
 install libmail/mailtool $RPM_BUILD_ROOT%{_bindir}/mailtool
-install help.txt $RPM_BUILD_ROOT%{_datadir}/cone/
+install help.txt $RPM_BUILD_ROOT%{_datadir}/cone
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -104,18 +108,18 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ABOUT-NLS ChangeLog README NEWS AUTHORS docs/
-%attr(0644,root,root) %config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/cone
-%attr(0755,root,root) %{_bindir}/cone
-%attr(0755,root,root) %{_bindir}/leaf
-%attr(0755,root,root) %{_bindir}/mailtool
+%config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/cone
+%attr(755,root,root) %{_bindir}/cone
+%attr(755,root,root) %{_bindir}/leaf
+%attr(755,root,root) %{_bindir}/mailtool
 %{_datadir}/cone
 %{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
 %doc devel/
-%{_mandir}/man[35]/*
 %{_includedir}/libmail
+%{_mandir}/man[35]/*
 
 %files static
 %defattr(644,root,root,755)
