@@ -1,12 +1,8 @@
-#
-# TODO:
-#	- test and rel. 1
-#
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
 Version:	0.60
-Release:	0.5
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
@@ -119,10 +115,6 @@ mv -f $RPM_BUILD_ROOT%{_datadir}/cone/leaf.html .
 # rest *.html will go to primary docs
 mkdir docs
 mv -f $RPM_BUILD_ROOT%{_datadir}/cone/*.html docs
-
-# install missing files
-install libmail/mailtool $RPM_BUILD_ROOT%{_bindir}/mailtool
-install help.txt $RPM_BUILD_ROOT%{_datadir}/cone
 
 %clean
 rm -rf $RPM_BUILD_ROOT
