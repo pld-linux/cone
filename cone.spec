@@ -12,10 +12,10 @@ BuildRequires:	aspell-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	fam-devel
-BuildRequires:	ncurses-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
+BuildRequires:	ncurses-devel
 BuildRequires:	openssl-devel
 BuildRequires:	openssl-tools-perl
 BuildRequires:	perl-base
