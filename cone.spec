@@ -1,12 +1,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	0.61
+Version:	0.62
 Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	bf3eaf6bf781115d99ed91f899de2ead
+# Source0-md5:	96883bf940dded1a135765aec7a9de26
 URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
 BuildRequires:	autoconf
