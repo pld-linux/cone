@@ -23,6 +23,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel
 BuildRequires:	openssl-devel
+BuildRequires:	openssl-tools-perl
 BuildRequires:	perl
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -64,6 +65,7 @@ pusty
 
 %build
 CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
+PATH=$PATH:/usr/lib/openssl; export PATH
 %configure \
     --with-devel
 
