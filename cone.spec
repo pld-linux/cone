@@ -1,13 +1,14 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	0.64
+Version:	0.65
 Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	0375a938da6347e42afd76135f334a6d
+# Source0-md5:	73ac17422c2dcf7a0a864b99fe786092
 Patch0:		%{name}-maildir.patch
+Patch1:		%{name}-linking.patch
 URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
 BuildRequires:	autoconf
@@ -79,12 +80,29 @@ edytorze u¿ywanym w czytniku poczty Cone.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
+
+cd cone
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+
+cd ../libmail
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+
+cd ../maildir
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+cd ..
 
 CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
 PATH=$PATH:/usr/%{_lib}/openssl; export PATH
@@ -137,6 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc devel/*
+%{_libdir}/libmail.la
 %{_includedir}/libmail
 %{_mandir}/man3/*
 
