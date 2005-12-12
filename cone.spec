@@ -69,13 +69,13 @@ Summary(pl):	Konsolowy edytor plików tekstowych
 Group:		Applications/Editors
 
 %description -n leaf
-Leaf is a simple console text file editor, with paragraph word-wrapping
-and spell checking. Leaf is based on the text editor in the Cone mail
-reader and composer.
+Leaf is a simple console text file editor, with paragraph
+word-wrapping and spell checking. Leaf is based on the text editor in
+the Cone mail reader and composer.
 
 %description -n leaf -l pl
-Leaf jest prostym konsolowym edytorem plików tekstowych. Jest oparty na
-edytorze u¿ywanym w czytniku poczty Cone.
+Leaf jest prostym konsolowym edytorem plików tekstowych. Jest oparty
+na edytorze u¿ywanym w czytniku poczty Cone.
 
 %prep
 %setup -q
@@ -145,7 +145,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog README NEWS docs/
-%config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/cone
+%config(noreplace)  %verify(not md5 mtime size) %{_sysconfdir}/cone
 %attr(755,root,root) %{_bindir}/cone
 %attr(755,root,root) %{_bindir}/mailtool
 %{_datadir}/cone
