@@ -1,5 +1,5 @@
 Summary:	CONE - Console Newsreader and Emailer
-Summary(pl.UTF-8):   CONE - tekstowy klient poczty i czytnik newsów
+Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
 Version:	0.68
 Release:	1
@@ -34,7 +34,7 @@ czytnikiem newsów.
 
 %package devel
 Summary:	Header files for LibMAIL
-Summary(pl.UTF-8):   Pliki nagłówkowe LibMAIL
+Summary(pl.UTF-8):	Pliki nagłówkowe LibMAIL
 Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
@@ -49,7 +49,7 @@ klientów pocztowych.
 
 %package static
 Summary:	Static LibMAIL library
-Summary(pl.UTF-8):   Biblioteka statyczna LibMAIL
+Summary(pl.UTF-8):	Biblioteka statyczna LibMAIL
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -64,7 +64,7 @@ C++ dla klientów pocztowych.
 
 %package -n leaf
 Summary:	Console text file editor
-Summary(pl.UTF-8):   Konsolowy edytor plików tekstowych
+Summary(pl.UTF-8):	Konsolowy edytor plików tekstowych
 Group:		Applications/Editors
 
 %description -n leaf
