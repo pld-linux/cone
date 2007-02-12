@@ -1,5 +1,5 @@
 Summary:	CONE - Console Newsreader and Emailer
-Summary(pl):	CONE - tekstowy klient poczty i czytnik newsÛw
+Summary(pl.UTF-8):   CONE - tekstowy klient poczty i czytnik news√≥w
 Name:		cone
 Version:	0.68
 Release:	1
@@ -28,13 +28,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 CONE is a simple, text-based E-mail reader and writer, and a simple
 newsreader.
 
-%description -l pl
-CONE jest prostym, tekstowym klientem pocztowym, a takøe prostym
-czytnikiem newsÛw.
+%description -l pl.UTF-8
+CONE jest prostym, tekstowym klientem pocztowym, a tak≈ºe prostym
+czytnikiem news√≥w.
 
 %package devel
 Summary:	Header files for LibMAIL
-Summary(pl):	Pliki nag≥Ûwkowe LibMAIL
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe LibMAIL
 Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
@@ -42,14 +42,14 @@ Requires:	%{name} = %{version}-%{release}
 This package includes the header files for developing applications
 using LibMAIL - a high level, C++ OO library for mail clients.
 
-%description devel -l pl
-Ten pakiet zawiera pliki nag≥Ûwkowe do tworzenia aplikacji z uøyciem
+%description devel -l pl.UTF-8
+Ten pakiet zawiera pliki nag≈Ç√≥wkowe do tworzenia aplikacji z u≈ºyciem
 LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki C++ dla
-klientÛw pocztowych.
+klient√≥w pocztowych.
 
 %package static
 Summary:	Static LibMAIL library
-Summary(pl):	Biblioteka statyczna LibMAIL
+Summary(pl.UTF-8):   Biblioteka statyczna LibMAIL
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -57,14 +57,14 @@ Requires:	%{name}-devel = %{version}-%{release}
 This package contains static library for developing application using
 LibMAIL - a high level, C++ OO library for mail clients.
 
-%description static -l pl
-Ten pakiet zawiera statyczn± bibliotekÍ do tworzenia aplikacji z
-uøyciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki
-C++ dla klientÛw pocztowych.
+%description static -l pl.UTF-8
+Ten pakiet zawiera statycznƒÖ bibliotekƒô do tworzenia aplikacji z
+u≈ºyciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki
+C++ dla klient√≥w pocztowych.
 
 %package -n leaf
 Summary:	Console text file editor
-Summary(pl):	Konsolowy edytor plikÛw tekstowych
+Summary(pl.UTF-8):   Konsolowy edytor plik√≥w tekstowych
 Group:		Applications/Editors
 
 %description -n leaf
@@ -72,9 +72,9 @@ Leaf is a simple console text file editor, with paragraph
 word-wrapping and spell checking. Leaf is based on the text editor in
 the Cone mail reader and composer.
 
-%description -n leaf -l pl
-Leaf jest prostym konsolowym edytorem plikÛw tekstowych. Jest oparty
-na edytorze uøywanym w czytniku poczty Cone.
+%description -n leaf -l pl.UTF-8
+Leaf jest prostym konsolowym edytorem plik√≥w tekstowych. Jest oparty
+na edytorze u≈ºywanym w czytniku poczty Cone.
 
 %prep
 %setup -q
