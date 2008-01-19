@@ -1,3 +1,7 @@
+#
+# TODO:
+#   - review devel doc files
+#
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
@@ -124,7 +128,7 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/cone.dist $RPM_BUILD_ROOT%{_sysconfdir}/cone
 
 # move devel docs from datadir
 mkdir devel
-for file in account-* address.html book.html c2*.html e*.html folder-* \
+for file in account-* address.html e*.html folder-* \
 header* libmail*.html mail-* mimestruct* misc* native* synchronous.html; do
 mv -f $RPM_BUILD_ROOT%{_datadir}/cone/$file devel
 done
