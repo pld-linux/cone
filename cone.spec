@@ -9,7 +9,7 @@ Version:	0.89
 Release:	1
 License:	GPL
 Group:		Applications/Mail
-Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
 # Source0-md5:	7ee8b8c0fe89d96bca3e93a2b82adfb9
 Patch0:		%{name}-maildir.patch
 URL:		http://www.courier-mta.org/cone/
@@ -26,6 +26,7 @@ BuildRequires:	openssl-tools-perl
 BuildRequires:	perl-base
 BuildRequires:	sysconftool
 BuildRequires:	zlib-devel
+Requires:	ca-certificates
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -47,9 +48,9 @@ This package includes the header files for developing applications
 using LibMAIL - a high level, C++ OO library for mail clients.
 
 %description devel -l pl.UTF-8
-Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji z użyciem
-LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki C++ dla
-klientów pocztowych.
+Ten pakiet zawiera pliki nagłówkowe do tworzenia aplikacji z
+użyciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo
+biblioteki C++ dla klientów pocztowych.
 
 %package static
 Summary:	Static LibMAIL library
@@ -63,8 +64,8 @@ LibMAIL - a high level, C++ OO library for mail clients.
 
 %description static -l pl.UTF-8
 Ten pakiet zawiera statyczną bibliotekę do tworzenia aplikacji z
-użyciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo biblioteki
-C++ dla klientów pocztowych.
+użyciem LibMAIL - wysokopoziomowej, zorientowanej obiektowo
+biblioteki C++ dla klientów pocztowych.
 
 %package -n leaf
 Summary:	Console text file editor
@@ -107,9 +108,9 @@ na edytorze używanym w czytniku poczty Cone.
 #cd ..
 
 
-CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
+CXXFLAGS="%{rpmcflags} -I/usr/include/ncurses"
 LDFLAGS="%{rpmldflags} -ltinfow"
-PATH=$PATH:/usr/%{_lib}/openssl; export PATH
+PATH=$PATH:%{_prefix}/%{_lib}/openssl; export PATH
 %configure \
 	--with-devel \
 	--with-certdb=%{_sysconfdir}/certs/ca-certificates.crt \
