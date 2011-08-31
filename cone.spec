@@ -5,12 +5,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	0.86
-Release:	0.1
+Version:	0.89
+Release:	1
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://dl.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	adca3a228526361e9ef4eb4dcd273306
+# Source0-md5:	7ee8b8c0fe89d96bca3e93a2b82adfb9
 Patch0:		%{name}-maildir.patch
 URL:		http://www.courier-mta.org/cone/
 BuildRequires:	aspell-devel
@@ -85,36 +85,39 @@ na edytorze używanym w czytniku poczty Cone.
 %patch0 -p1
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__automake}
+#%{__libtoolize}
+#%{__aclocal}
+#%{__autoconf}
+#%{__automake}
 
-cd cone
-%{__aclocal}
-%{__autoconf}
-%{__automake}
+#cd cone
+#%{__aclocal}
+#%{__autoconf}
+#%{__automake}
 
-cd ../libmail
-%{__aclocal}
-%{__autoconf}
-%{__automake}
+#cd ../libmail
+#%{__aclocal}
+#%{__autoconf}
+#%{__automake}
 
-cd ../maildir
-%{__aclocal}
-%{__autoconf}
-%{__automake}
-cd ..
+#cd ../maildir
+#%{__aclocal}
+#%{__autoconf}
+#%{__automake}
+#cd ..
+
 
 CXXFLAGS="%{rpmcflags} -I%{_includedir}/ncurses"
+LDFLAGS="%{rpmldflags} -ltinfow"
 PATH=$PATH:/usr/%{_lib}/openssl; export PATH
 %configure \
 	--with-devel \
+	--with-certdb=%{_sysconfdir}/certs/ca-certificates.crt \
 	SENDMAIL=%{_sbindir}/sendmail
 
 %{__make}
 
-%{__make} check
+#%{__make} check
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -123,7 +126,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 # start cone directly
-mv -f $RPM_BUILD_ROOT%{_libdir}/cone $RPM_BUILD_ROOT%{_bindir}
+#mv -f $RPM_BUILD_ROOT%{_libdir}/cone $RPM_BUILD_ROOT%{_bindir}
+cp cone.sh $RPM_BUILD_ROOT%{_bindir}/cone
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/cone.dist $RPM_BUILD_ROOT%{_sysconfdir}/cone
 
 # move devel docs from datadir
@@ -150,6 +154,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace)  %verify(not md5 mtime size) %{_sysconfdir}/cone
 %attr(755,root,root) %{_bindir}/cone
 %attr(755,root,root) %{_bindir}/mailtool
+%attr(755,root,root) %{_libdir}/cone
 %{_datadir}/cone
 %{_mandir}/man1/cone*
 %{_mandir}/man1/mailtool*
