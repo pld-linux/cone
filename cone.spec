@@ -6,7 +6,7 @@ Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
 Version:	0.89
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Mail
 Source0:	http://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
