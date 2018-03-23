@@ -1,0 +1,55 @@
+--- cone-0.96.2/curses/configure.ac.orig	2017-03-09 15:52:04.000000000 +0100
++++ cone-0.96.2/curses/configure.ac	2018-03-22 18:47:51.458660590 +0100
+@@ -44,12 +44,18 @@
+ 	AC_MSG_ERROR([curses library not found.])
+ fi
+ 
++for f in tinfow tinfo
++do
++	AC_CHECK_LIB($f, keypad, [CURSESLIBRARY="$CURSESLIBRARY -l$f"; break])
++done
++
+ CURSESLIB="-l$CURSESLIBRARY"
+ AC_SUBST(CURSESLIB)
+ 
+ dnl Checks for header files.
+ AC_CHECK_HEADERS(sys/time.h unistd.h sys/wait.h glob.h)
+ AC_CHECK_HEADERS(ncursesw/curses.h)
++AC_CHECK_HEADERS(ncurses/curses.h)
+ 
+ AC_HEADER_TIME
+ AC_HEADER_DIRENT
+@@ -61,7 +67,13 @@
+ AC_MSG_CHECKING(for use_default_colors())
+ 
+ AC_TRY_LINK([
++#if HAVE_NCURSESW_CURSES_H
++#include <ncursesw/curses.h>
++#elif HAVE_NCURSES_CURSES_H
++#include <ncursesw/curses.h>
++#else
+ #include <curses.h>
++#endif
+ ],[
+ 	use_default_colors();
+ ], [AC_MSG_RESULT(yes)
+@@ -72,6 +84,8 @@
+ AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
+ #if HAVE_NCURSESW_CURSES_H
+ #include <ncursesw/curses.h>
++#elif HAVE_NCURSES_CURSES_H
++#include <ncursesw/curses.h>
+ #else
+ #include <curses.h>
+ #endif
+--- cone-0.96.2/curses/cursesscreen.H.orig	2017-03-06 02:28:33.000000000 +0100
++++ cone-0.96.2/curses/cursesscreen.H	2018-03-22 18:48:36.601993408 +0100
+@@ -13,6 +13,8 @@
+ 
+ #if HAVE_NCURSESW_CURSES_H
+ #include <ncursesw/curses.h>
++#if HAVE_NCURSES_CURSES_H
++#include <ncurses/curses.h>
+ #else
+ #include <curses.h>
+ #endif
