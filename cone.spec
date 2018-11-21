@@ -7,12 +7,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	0.96.2
-Release:	2
+Version:	1.0
+Release:	1
 License:	GPL v3 with OpenSSL exception
 Group:		Applications/Mail
 Source0:	http://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	ea8925d531b43fd8ee36b0363434b1b8
+# Source0-md5:	57ea2f089455c3eae4437f243d786606
 Patch0:		%{name}-maildir.patch
 Patch1:		%{name}-curses.patch
 URL:		http://www.courier-mta.org/cone/
@@ -42,6 +42,9 @@ BuildRequires:	sysconftool
 BuildRequires:	zlib-devel
 Requires:	ca-certificates
 Suggests:	gnupg
+Conflicts:	courier-imap < 5
+Conflicts:	courier-imapd < 1
+Conflicts:	maildrop < 3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -111,7 +114,8 @@ done
 	SENDMAIL=/usr/lib/sendmail \
 	--with-certdb=%{_sysconfdir}/certs/ca-certificates.crt \
 	--with-devel \
-	%{?with_gnutls:--with-gnutls}
+	%{?with_gnutls:--with-gnutls} \
+	--with-notice=unicode
 
 %{__make}
 
@@ -133,6 +137,12 @@ install -d $RPM_BUILD_ROOT%{_docdir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%triggerpostun -- %{name} < 1
+%banner -e cone-unicode <<EOF
+WARNING: you have to convert any existing maildirs to Unicode naming scheme.
+See INSTALL file for details.
+EOF
 
 %files
 %defattr(644,root,root,755)
