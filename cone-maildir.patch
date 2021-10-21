@@ -17,7 +17,7 @@ diff -Nur old/cone/mainmenu.C new/cone/mainmenu.C
 +++ new/cone/mainmenu.C	2004-09-05 17:36:23.000000000 +0000
 @@ -343,15 +343,25 @@
  
- 		if (key_INBOXMBOX == ka[0])
+ 		if (key_INBOXMBOX == promptKey)
  		{
 -			string maildir=homedir + "/Maildir/.";
 +			string maildir=homedir + "/Mail/Maildir/.";
