@@ -7,12 +7,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	1.2
-Release:	2
+Version:	1.5
+Release:	1
 License:	GPL v3 with OpenSSL exception
 Group:		Applications/Mail
-Source0:	http://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	a845692b6d50fc8b58df2f1b99344623
+Source0:	https://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
+# Source0-md5:	a67ea05b272b17f4333ec648a9f7c809
 Patch0:		%{name}-maildir.patch
 Patch1:		%{name}-curses.patch
 URL:		http://www.courier-mta.org/cone/
@@ -21,6 +21,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_socks:BuildRequires:	courier-sox-devel}
 BuildRequires:	courier-unicode-devel >= 2.1
+BuildRequires:	gettext-tools
 # or gnupg2 --with-gpg2, will use the same at runtime
 BuildRequires:	gnupg
 %{?with_gnutls:BuildRequires:	gnutls-devel >= 3.0}
@@ -33,7 +34,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	ncurses-devel >= 5
 BuildRequires:	openldap-devel
 %{!?with_gnutls:BuildRequires:	openssl-devel >= 0.9.7d}
-BuildRequires:	pcre-devel
+BuildRequires:	pcre2-8-devel
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	procps
