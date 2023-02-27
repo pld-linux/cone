@@ -7,12 +7,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	1.5
-Release:	2
+Version:	1.8
+Release:	1
 License:	GPL v3 with OpenSSL exception
 Group:		Applications/Mail
 Source0:	https://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	a67ea05b272b17f4333ec648a9f7c809
+# Source0-md5:	3b5c398c693d6aa60ea90f4d19f0ac39
 Patch0:		%{name}-maildir.patch
 Patch1:		%{name}-curses.patch
 URL:		http://www.courier-mta.org/cone/
@@ -27,7 +27,7 @@ BuildRequires:	gnupg
 %{?with_gnutls:BuildRequires:	gnutls-devel >= 3.0}
 %{?with_gnutls:BuildRequires:	libgcrypt-devel}
 %{?with_gnutls:BuildRequires:	libgpg-error-devel}
-BuildRequires:	libidn-devel >= 0.0.0
+BuildRequires:	libidn2-devel >= 0.0.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
@@ -61,7 +61,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteka statyczna LibMAIL
 Group:		Development/Libraries
 Requires:	courier-unicode-devel >= 2.0
 %{?with_gnutls:Requires:	gnutls-devel >= 3.0}
-Requires:	libidn-devel >= 0.0.0
+Requires:	libidn2-devel >= 0.0.0
 Requires:	libstdc++-devel
 %{!?with_gnutls:Requires:	openssl-devel >= 0.9.7d}
 Obsoletes:	cone-static < 0.96
