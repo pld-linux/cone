@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	tests	# "make check"
+%bcond_with	tests	# "make check" (requires operational valgrind, i.e. with glibc-debuginfo)
 %bcond_with	gnutls	# GnuTLS instead of OpenSSL
 %bcond_with	socks	# (Courier) Socks support
 
@@ -39,6 +39,7 @@ BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	procps
 BuildRequires:	sysconftool
+%{?with_tests:BuildRequires:	valgrind}
 BuildRequires:	zlib-devel
 Requires:	ca-certificates
 Suggests:	gnupg
