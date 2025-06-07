@@ -7,12 +7,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	1.8
+Version:	1.15
 Release:	1
 License:	GPL v3 with OpenSSL exception
 Group:		Applications/Mail
 Source0:	https://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	3b5c398c693d6aa60ea90f4d19f0ac39
+# Source0-md5:	1b836e8e904dd609748f145de9c7b0ac
 Patch0:		%{name}-maildir.patch
 Patch1:		%{name}-curses.patch
 URL:		http://www.courier-mta.org/cone/
@@ -25,11 +25,12 @@ BuildRequires:	gettext-tools
 # or gnupg2 --with-gpg2, will use the same at runtime
 BuildRequires:	gnupg
 %{?with_gnutls:BuildRequires:	gnutls-devel >= 3.0}
+BuildRequires:	hunspell-devel
 %{?with_gnutls:BuildRequires:	libgcrypt-devel}
 %{?with_gnutls:BuildRequires:	libgpg-error-devel}
-BuildRequires:	libidn2-devel >= 0.0.0
+BuildRequires:	libidn2-devel >= 2.0.5
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libtool >= 2:2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	ncurses-devel >= 5
 BuildRequires:	openldap-devel
@@ -42,7 +43,9 @@ BuildRequires:	sysconftool
 %{?with_tests:BuildRequires:	valgrind}
 BuildRequires:	zlib-devel
 Requires:	ca-certificates
+Requires:	libidn2 >= 2.0.5
 Suggests:	gnupg
+Suggests:	hunspell
 Conflicts:	courier-imap < 5
 Conflicts:	courier-imapd < 1
 Conflicts:	maildrop < 3
@@ -62,7 +65,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteka statyczna LibMAIL
 Group:		Development/Libraries
 Requires:	courier-unicode-devel >= 2.0
 %{?with_gnutls:Requires:	gnutls-devel >= 3.0}
-Requires:	libidn2-devel >= 0.0.0
+Requires:	libidn2-devel >= 2.0.5
 Requires:	libstdc++-devel
 %{!?with_gnutls:Requires:	openssl-devel >= 0.9.7d}
 Obsoletes:	cone-static < 0.96
@@ -96,12 +99,18 @@ używanym w czytniku poczty Cone.
 %setup -q
 %patch -P0 -p1
 
+%{__sed} -i -e 's,`which hunspell`,/usr/bin/hunspell,' cone/configure.ac
+
 %build
 %{__libtoolize}
 for d in $(sed -ne 's/.*AC_CONFIG_SUBDIRS(\([^)]*\))/\1/p' configure.ac) . ; do
 	if [ -d "$d" ]; then
 		cd $d
-		%{__aclocal}
+		if [ "$d" = "cone" ]; then
+			%{__gettextize}
+			%{__libtoolize}
+		fi
+		%{__aclocal} $(test ! -d m4 || echo -I m4)
 		%{__autoconf}
 		if grep -q AC_CONFIG_HEADER configure.ac ; then
 			%{__autoheader}
