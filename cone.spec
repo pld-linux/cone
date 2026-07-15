@@ -7,12 +7,12 @@
 Summary:	CONE - Console Newsreader and Emailer
 Summary(pl.UTF-8):	CONE - tekstowy klient poczty i czytnik newsów
 Name:		cone
-Version:	1.15
-Release:	3
+Version:	2.3
+Release:	1
 License:	GPL v3 with OpenSSL exception
 Group:		Applications/Mail
 Source0:	https://downloads.sourceforge.net/courier/%{name}-%{version}.tar.bz2
-# Source0-md5:	1b836e8e904dd609748f145de9c7b0ac
+# Source0-md5:	8f507fca72ad93346faa61b0295a4c1c
 Patch0:		%{name}-maildir.patch
 Patch1:		%{name}-curses.patch
 URL:		http://www.courier-mta.org/cone/
@@ -20,7 +20,7 @@ BuildRequires:	aspell-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_socks:BuildRequires:	courier-sox-devel}
-BuildRequires:	courier-unicode-devel >= 2.1
+BuildRequires:	courier-unicode-devel >= 2.6
 BuildRequires:	gettext-tools
 # or gnupg2 --with-gpg2, will use the same at runtime
 BuildRequires:	gnupg
@@ -29,14 +29,14 @@ BuildRequires:	hunspell-devel
 %{?with_gnutls:BuildRequires:	libgcrypt-devel}
 %{?with_gnutls:BuildRequires:	libgpg-error-devel}
 BuildRequires:	libidn2-devel >= 2.0.5
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtool >= 2:2
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	ncurses-devel >= 5
 BuildRequires:	openldap-devel
 %{!?with_gnutls:BuildRequires:	openssl-devel >= 0.9.7d}
 BuildRequires:	pcre2-8-devel
-BuildRequires:	perl-base
+BuildRequires:	perl-base >= 5
 BuildRequires:	pkgconfig
 BuildRequires:	procps
 BuildRequires:	sysconftool
@@ -63,7 +63,7 @@ czytnikiem newsów.
 Summary:	Header files and static LibMAIL library
 Summary(pl.UTF-8):	Pliki nagłówkowe i biblioteka statyczna LibMAIL
 Group:		Development/Libraries
-Requires:	courier-unicode-devel >= 2.0
+Requires:	courier-unicode-devel >= 2.6
 %{?with_gnutls:Requires:	gnutls-devel >= 3.0}
 Requires:	libidn2-devel >= 2.0.5
 Requires:	libstdc++-devel
